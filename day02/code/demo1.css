@@ -1,0 +1,17 @@
+
+div {
+    /* 高度 */
+    height:50px;
+    /*文本水平居中  */
+    text-align: center;
+}
+#div3{
+    /* 背景颜色 */
+    background-color: skyblue;
+    /* 字体颜色 */
+    color:red
+}
+p{
+    /* 字体大小 */
+    font-size: 30px;
+}

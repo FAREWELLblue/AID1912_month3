@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>form表单控件</form></title>
+</head>
+<body>
+    <form action="">
+            <!-- <input type="text">文本框 -->
+            <!-- <input type="password"> 密码框 -->
+            <div>
+                <label for="uname">姓名：</label>
+                <input type="text"  id="uname" name="uname" placeholder="用户名不能超过12位" maxlength="12" minlength="6">
+            </div>
+
+            <div>
+                <label for="pwd">密码：</label>
+                <input type="password"id="pwd" name="pwd" placeholder="请输入密码">
+            </div>
+ <!-- <input type="radio">单选框  name属性相同时可单选-->
+            <input type="radio" name="0" >男
+            <input type="radio" name="0">女
+            <br>
+<!-- 复选框 -->
+            <input type="checkbox" name="" id="">已阅读并同意协议
+            <br>
+
+<!-- 上传文件 -->
+            <input type="file">
+            <br>
+<!-- 按钮 -->
+            <input type="button" value="普通按钮">
+            <input type="submit" value="提交按钮">
+            <input type="reset" value="重置按钮">
+            <br>
+<!-- 文本域  col列,rows行-->
+            <textarea name="" id="" cols="30" rows="10" placeholder="30*10"></textarea>
+            <br>
+<!-- 下拉菜单 -->
+            <select name="" id="">
+                <option value="">请选择</option>
+                <option value="">北京</option>
+                <option value="">上海</option>
+                <option value="">深圳</option>
+            </select>
+            <br>
+
+    </form>
+</body>
+</html>
