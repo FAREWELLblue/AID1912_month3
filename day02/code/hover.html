@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>hover</title>
+    <style>
+        #d1{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            color: skyblue;
+            /* transition 过度 让样式的变化在指定时间内完成 */
+            transition: all 1s ;
+        }
+        #d1:hover{
+            background-color: skyblue;
+            color: red;
+            text-align: center;
+        }
+        #btn:link{
+            /* 访问前 */
+            background-color: aqua;
+        }
+        #btn:visited{
+            /* 访问前 */
+            background-color: coral;
+        }
+        #btn:hover{
+            text-decoration:underline ;
+        }
+        #btn:active{
+            
+        }
+
+    </style>
+</head>
+<body>
+    <div id="d1">这是一段文字</div>
+    <a href="http://www.baidu.com" id="btn">百度</a>
+</body>
+</html>

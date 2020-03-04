@@ -1,19 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>selector</title>
     <style>
-        #classname{
+        /* 标签{}
+            #id{}
+            .class{}*/
+        #classname {
             font-size: 20px;
             color: red;
         }
+
+        .red {
+            color: red
+        }
+
+        div.red {
+            /* div中 class是red的 */
+            font-size: 30px;
+            text-align: center;
+        }
+
+        .yellowBG {
+            background-color: yellowgreen;
+            color: blue;
+        }
+
+        body,
+        div,
+        h1,
+        p,
+        ul,
+        li {
+            /*清楚页面元素的默认边距*/
+            margin: 0;/*外边距*/
+             padding:0;/*内边距*/
+        }
+        
     </style>
 </head>
+
 <body>
     <div id="classname"> AID1912</div>
-    <div>阶段:python web </div>
+    <div class="red ">阶段:python web </div>
+    <h1>静夜思</h1>
+    <p class=" red yellowBG ">李白</p>
+    <ul>
+        <li>床前明月光</li>
+        <li class="red">疑是地上霜</li>
+    </ul>
 </body>
+
 </html>
