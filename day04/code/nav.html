@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    ul,li {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+    #nav{
+        border: 1px solid red;
+    }
+   #nav> .first{
+        margin: 10px 10px;
+        color: #666;
+        float: left;
+    }
+    #nav>.item{
+        border: 1px solid red;
+        padding: 0 5px;
+        margin: 10px;
+        transition: 1s;
+        float: left;
+    }
+    #nav>.item:hover{
+        cursor: pointer;
+        background-color: red;
+        color: white;
+    }
+    .clear{
+        clear: both;
+    }
+</style>
+</head>
+<body>
+    <ul id="nav">
+        <li class="first">难度:</li>
+        <li class="item">全部</li>
+        <li class="item">初级</li>
+        <li class="item active">中级</li>
+        <li class="item">高级</li>
+        <div class="clear"></div>
+    </ul>
+</body>
+</html>

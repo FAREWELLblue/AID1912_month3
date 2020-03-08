@@ -10,15 +10,33 @@
             width: 400px;
             height: 400px;
             background-color:aquamarine;
-            margin: 0;
+            margin: 0 auto;
+            border: 50px solid blue;
+            padding-top: 0.1px;
+            /* 垂直居中 内部div相对上外边距以外部div内容部分为准*/
+            box-sizing: border-box;
+            /* box-sizing: 
+                boder-box:将元素盒模型计算方式简化
+                            元素实际所占宽度  =  元素宽度width+元素左右外边距
+                            元素实际所占高度  =  元素宽度height+元素上下外边距
+                            将宽度width/高度height所表示的区域变成元素内容+内边距+边框          只要内边距或边框发生改变,浏览器会自动修改内容的大小
+
+            */
+
         }
         #parent div{
             width: 200px;
             height: 200px;
             background-color: red;
             margin: 0 auto;
-            /* margin-top: 100px; */
+            margin-top: 100px;/* 外边距溢出*/
+            
         }
+
+        /* 盒模型计算方式(确定元素在页面实际所占空间) */
+        /* 标准模式中   元素实际所占宽度=元素宽度width  +  元素左右内边距   +   元素左右边框  +  元素左右外边距 */
+        /* 标准模式中   元素实际所占高度=元素高度height  +  元素上下内边距   +   元素上下边框  +  元素上下外边距  */
+
     </style>
 </head>
 <body>

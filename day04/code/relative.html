@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>相对定位</title>
+    <style>
+    #d1{
+        width: 300px;
+        height: 300px;
+        background-color: blue;
+        position: relative ;
+        left:100px;
+        top: 100px;
+        /* right: 150px; */
+        /* bottom: 200px;  */
+        /* 定位元素显示在普通元素上,提高优先级 */
+        z-index: 1;/* 层级,越高越靠上显示 */
+    }
+    #d2{
+        width: 500px;
+        height: 300px;
+        background-color: red;
+        position: relative;
+        /* 默认后写的定位在上显示 */
+    }
+    </style>
+</head>
+<body>
+    <div id="d1"></div>
+    <div id="d2"></div>
+
+</body>
+
+</html>
