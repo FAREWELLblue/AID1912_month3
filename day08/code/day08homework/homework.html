@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>1,改图片属性连接值</title>
+    <style>
+        
+        #pics{
+            width: 739px;
+            height:419px;
+            border:1px solid red;
+            position: relative;
+        }
+        #left{
+            position: absolute;
+            left: 30px;
+            top:175px;
+        }
+        #right{
+            position: absolute;
+            right:30px;
+            top: 175px;
+        }
+    </style>
+   
+</head>
+<body>
+    <!-- 
+        完成轮播图样式
+            1,改图片属性连接值
+            2,所有图片叠在一起
+            3,所有图片在一个div里,div左移或右移
+        点击按钮可以切换
+        自动轮播
+        添加效果鼠标移入时停止定时器,鼠标移出时启动定时器
+            搜索鼠标移入移出事件
+    -->
+    <div id='pics'>
+        <img id="pic" src="" alt="">
+        <img id="right" src="../imgs/r1-6.png" alt="" style="height: 40px;width: 23px;">
+        <img id="left" src="../imgs/l1-6.png" alt="" >
+    </div>
+    <script>
+        var i = 1;
+        var timer=null;
+        var url = "../imgs/gm"+i+"-6.jpg";
+        document.getElementById('pic').src=url;
+        //单击左右可切换图片
+        document.getElementById('right').onclick=next();
+        function next(){
+            if (i<5){
+                i++;
+            }else{
+                i=1;
+            };
+            url = "../imgs/gm"+i+"-6.jpg"
+            console.log(url)
+            document.getElementById('pic').src=url;
+        };
+        document.getElementById('left').onclick=function(){
+            if (i>1){
+                i--;
+            }else{
+                i=5;
+            };
+            url = "../imgs/gm"+i+"-6.jpg"
+            console.log(url)
+            document.getElementById('pic').src=url;
+        };
+        //设置计时器,1.5s向下一张切换
+        var timer=setInterval(next,1000);
+        //鼠标移入时暂停自动切换
+        document.getElementById('pic').onmouseover=function(){
+            console.log(timer);
+            if(timer!=null){
+                clearInterval(timer);
+                timer=null;
+            }
+        }
+        document.getElementById('pic').onmouseout=function(){
+            console.log(timer);
+            if(timer==null){
+                timer=setInterval(next,1000);}
+                
+        }
+        
+    </script>
+</body>
+</html>

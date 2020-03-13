@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">后退</button>
+    <h1 id="title"></h1>
+    <script>
+    var btn = document.getElementById('btn');
+        btn.onclick=function(){
+            window.history.back();
+        }
+    </script>
+    <script>
+        
+        function countDown(){
+            var now = new Date();
+            var end = new Date("2020/03/13,18:00:00");
+            // 获取时间差的总秒数, 转换成整数
+            var leftTime = parseInt(end.getTime() - now.getTime()) / 1000
+            console.log(leftTime);
+            var d = parseInt(leftTime / (60 * 60 * 24));
+            var h = parseInt(leftTime / (60 * 60) % 24);
+            var s = parseInt(leftTime % 60);
+            var m = parseInt(leftTime / 60 % 60);
+            console.log(d,h,m,s);
+            var h1 = document.getElementById('title');
+            h1.innerHTML="距离下课还有"+addZero(d)+"天"+addZero(h)+"小时"+addZero(m)+"分"+addZero(s)+"秒";
+            if (leftTime<=0){
+                h1.innerHTML="时间到"
+                return 
+            }
+            setTimeout(countDown,1000);
+            
+        }
+        // 如果数字小于10  补零
+        function addZero(num) {
+            return num < 10 ? "0" + num : num + '';
+        }
+
+        countDown();
+        // var timer = setInterval(countDown,300);
+        //当leftTime的值小于0时,停止计时器
+        //使用一次性定时器 setTimeout完成功能
+
+
+        
+
+    </script>
+</body>
+
+
+</html>

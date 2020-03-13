@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+     #d1{
+         width:200px;
+         height:300px;
+         position:fixed;
+         right:0;
+         bottom:-300px;
+         background-color:red;
+         transition:all 2s;
+     }
+    </style>
+</head>
+<body>
+    <button id='btn'>停止定时器</button>
+    <button id='btn2'>启动定时器</button>
+    <div id="d1"></div>
+    <button id="btn3">前进</button>
+
+    <a href="countDown.html">前往countDown</a>
+    <script>
+        var btn3 = document.getElementById('btn3');
+        btn3.onclick=function(){
+            history.forward();
+        }
+    </script>
+
+    <script>
+        //一次性定时器
+        var d1=document.getElementById('d1');
+        setTimeout(function(){
+            d1.style = 'bottom:0;'
+        },3000)
+
+
+
+
+
+
+        
+        // function sayHello() {
+        //     console.log('hello');
+        // }
+        //设置周期性定时器
+        // setInterval(sayHello, 1000)
+
+    </script>
+</body>
+</html>

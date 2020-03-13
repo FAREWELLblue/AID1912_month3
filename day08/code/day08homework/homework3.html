@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>3,所有图片在一个div里,div左移或右移</title>
+    <style>
+        
+        .pic{
+            width:739px;
+            height:419px;
+            position: relative;
+            display:none;
+        }
+        .main{
+            width:739px;
+            height:419px;
+            display:block;
+        }
+        #left{
+            position: absolute;
+            left: 30px;
+            top:175px;
+        }
+        #right{
+            position: absolute;
+            left:680px;
+            top: 175px;
+        }
+    </style>
+   
+</head>
+<body>
+    <!-- 
+        完成轮播图样式
+            1,改图片属性连接值
+            2,所有图片叠在一起
+            3,所有图片在一个div里,div左移或右移
+        点击按钮可以切换
+        自动轮播
+        添加效果鼠标移入时停止定时器,鼠标移出时启动定时器
+            搜索鼠标移入移出事件
+    -->
+    <div id='pics'>
+        <img class="pic main" src=../../imgs/gm1-6.jpg alt="" >
+        <img class="pic" src=../../imgs/gm2-6.jpg alt="">
+        <img class="pic" src=../../imgs/gm3-6.jpg alt="">
+        <img class="pic" src=../../imgs/gm4-6.jpg alt="">
+        <img class="pic" src=../../imgs/gm5-6.jpg alt="">
+        <img id="right" src="../../imgs/r1-6.png" alt="" style="height: 40px;width: 23px;">
+        <img id="left" src="../../imgs/l1-6.png" alt="" >
+    </div>
+    <script>
+        var i=0;
+        document.getElementById('right').onclick=next();
+        var pics = document.getElementsByClassName('pic');
+        console.log(pics[0]);
+        function next(){
+        
+        }
+       
+    
+
+        // //设置计时器,1.5s向下一张切换
+        // var timer=setInterval(next,1000);
+        // //鼠标移入时暂停自动切换
+        // document.getElementById('pic').onmouseover=function(){
+        //     console.log(timer);
+        //     if(timer!=null){
+        //         clearInterval(timer);
+        //         timer=null;
+        //     }
+        // }
+        // document.getElementById('pic').onmouseout=function(){
+        //     console.log(timer);
+        //     if(timer==null){
+        //         timer=setInterval(next,1000);}
+                
+        // }
+        
+    </script>
+</body>
+</html>
