@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul,
+        li {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        #nav {
+            border: 1px solid red;
+        }
+
+        #nav>li {
+            display: inline-block;
+        }
+
+       #nav .first {
+            margin: 5px 10px;
+            color: #666;
+        }
+
+        #nav .item {
+            /* border: 1px solid red; */
+            padding: 0 5px;
+            margin: 10px;
+            transition: 1s;
+        }
+
+        #nav>.active {
+            background-color: red;
+            color: white;
+        }
+
+        #nav .item:hover {
+            cursor: pointer;
+            background-color: red;
+            color: white;
+        }
+        
+
+    </style>
+</head>
+
+<body>
+    <ul id="nav">
+        <li class="first">难度:</li>
+        <li class="item" >全部</li>
+        <li class="item">初级</li>
+        <li class="item active">中级</li>
+        <li class="item">高级</li>
+    </ul>
+
+    <script>
+        //1.查找页面元素
+        lis = document.getElementsByClassName('item');
+        //2.为元素添加单击事件
+        for (var i=0;i<lis.length;i++){
+            //使用this指代当前对象
+            lis[i].onclick=function(){
+                    for (var j=0;j<lis.length;j++){
+                        lis[j].setAttribute('class','item');
+                    }
+                    //this指代当前对象 谁触发这个事件 当前对象就是谁
+                    this.setAttribute('class','item active');
+                
+            }
+        }
+        
+
+
+
+
+      /* 闭包  
+        for (var i=0;i<lis.length;i++){
+            lis[i].onclick=function(inner_i){
+                // 使用闭包的方式 留住外部的i
+                return function(){
+                    for (var j=0;j<lis.length;j++){
+                        lis[j].setAttribute('class','item');
+                    }
+                    lis[inner_i].setAttribute('class','item active');
+                }
+            }(i)//将i传入inner_i
+        }
+        */
+        
+        
+        
+        /*for (var i=0;i<lis.length;i++){
+            lis[i].onclick=function(){
+                //3.添加功能
+                //lis全部按钮class="item"
+                for (var j=0;j<lis.length;j++){
+                    // lis[j].className='item';
+                    lis[j].setAttribute('class','item');
+                }
+                //lis中的当前按钮 class="item active"
+                // lis[i].className="item active";
+                // console.log(i);
+                // 页面加载完成时for循环已经结束,单击时才会调用函数
+                // i是函数外部的循环中的值,当函数执行时,外部的i已经变成终止循环时的i的值,不能表示当前的元素的索引
+                // lis[i].setAttribute('class','item active');
+
+            }
+        }*/
+
+    </script>
+</body>
+
+</html>
