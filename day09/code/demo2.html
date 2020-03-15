@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="text">
+    <button id="btn">按钮</button>
+    <div id="show"></div>
+
+    <script src="../js/jquery.min.js"></script>
+    <script>
+        $("#btn")[0].onclick=function(){
+            // $("#show").html("<h1>"+$("#text").val()+"</h1>");
+            // jQuery 可以链式
+            $("#show").html($("#text").val()).
+            css('font-size','30px').
+            css('font-weight','bold').
+            css('color','blue');
+        }
+        
+        
+        //1.找元素
+        // var text = $("#text");
+        // var btn = $("#btn");
+        // var show = $("#show");
+        // //2.绑定事件
+        // // 当按钮被单击时,将文本框的内容放入到div中  放大 加粗显示
+        // // btn[0]DOM对象
+        // btn[0].onclick=function(){
+        //     show.html("<h1>"+text.val()+"</h1>");
+        //     // console.log(text.val());
+        // }
+    </script>
+</body>
+</html>
