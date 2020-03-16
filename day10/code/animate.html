@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="../js/jquery.min.js"></script>
+    <script>
+        //window.onload
+        $(function(){
+              //CSS样式使用时不要使用值为字符串的样式,例如背景颜色
+            $("#ball").animate({'left':'300px','width':'100px'},1500,function(){
+                //第一个动画执行完成后要做的事情
+                $("#ball").animate({'left':'0','width':'50px'},1500,function(){
+                    //第二个动画执行完成
+                    $("#ball").fadeOut(1500);
+                })
+            })
+        })
+        $(function(){
+            console.log("hello");
+        })
+    </script>
     <style>
         #ball{
             width: 50px;
@@ -17,17 +34,6 @@
 </head>
 <body>
     <div id="ball"></div>
-    <script src="../js/jquery.min.js"></script>
-    <script>
-        //CSS样式使用时不要使用值为字符串的样式,例如背景颜色
-        $("#ball").animate({'left':'300px','width':'100px'},1500,function(){
-            //第一个动画执行完成后要做的事情
-            $("#ball").animate({'left':'0','width':'50px'},1500,function(){
-                //第二个动画执行完成
-                $("#ball").fadeOut(1500);
-            })
-        })
-        
-    </script>
+    
 </body>
 </html>
