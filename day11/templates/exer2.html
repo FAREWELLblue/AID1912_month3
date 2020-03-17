@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>注册用户</h1>
+    <div>
+        姓名:
+        <input type="text" id="uname">
+        <span style="color:red;" id="msg"></span><br>
+        密码:
+        <input type="password" id="pwd">
+    </div>
+    <button id="btn">提交</button>
+    <script src="../static/jquery.min.js"></script>
+    <script>
+        // 当按钮btn被单击时,发送ajax请求 
+            // 获取uname的值
+            // 创建xhr对象
+            // 创建请求  方式get  地址/exer2_server  异步发送
+            //绑定事件
+                //当服务器端程序响应的结果全都下载完成同时相应的状态码为200时
+                    //接收服务器端数据 如果用户名重复,提示用户名已存在,不重复提示OK
+                    //将服务器端的数据放入页面h1中显示
+            //发送请求
+            
+        var $uname = $("#uname");
+        console.log($uname)
+        var $msg=$("#msg")
+
+        $("#uname").change(function(){
+
+        
+        // $("#btn").click(function(){
+            var xhr = new XMLHttpRequest();
+            xhr.open('get','/exer2_server?uname='+$uname.val(),true);
+            xhr.onreadystatechange= function(){
+                if(xhr.readyState==4 && xhr.status==200){
+                    console.log(xhr.responseText);
+                    if(xhr.responseText=='OK'){
+                        $msg.html("可以注册");
+                        $msg.css('color','green');
+                    }else{   
+                        $msg.css('color','red');
+                        $msg.html("用户名已存在");
+                    }
+                } 
+            }
+            xhr.send(null);
+        })
+    </script>
+</body>
+</html>

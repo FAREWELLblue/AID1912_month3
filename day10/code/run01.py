@@ -29,6 +29,7 @@ def server():
     # 接收POST请求提交的数据
     # print(request.form)
     # uname=request.form['uname']
+    print(request.method)#保存当前请求的数据提交方式
     uname=request.form.get('uname','')
     return f'欢迎{uname}'
 
