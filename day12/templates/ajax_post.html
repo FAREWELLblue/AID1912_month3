@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input id='uname' type="text">
+    <button id="btn">点击发送post请求</button>
+    <div id="show"></div>
+    <script src="../static/jquery.min.js"></script>
+    <script>
+        $("#btn").click(function(){
+            var xhr = new XMLHttpRequest();
+            xhr.open('post','/post',true);
+            xhr.onreadystatechange = function(){
+                if (xhr.readyState==4&&xhr.status==200){
+                    console.log(xhr.responseText);
+                    $("#show").html(xhr.responseText)
+                }
+            }
+            //定义要发送的数据
+            //数据格式为uname=xx&&age=xxx&...
+            var data = "uname="+$("#uname").val();
+            //指定数据发送的格式 以表单的格式发送
+            xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+            xhr.send(data);
+        })
+    </script>
+</body>
+</html>
