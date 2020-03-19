@@ -1,12 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    这是主页
-</body>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>主页</title>
+	    <link rel="icon" href="../static/bgimg/favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" href="../static/css/index.css">
+	    <script src="../static/js/jquery.min.js"></script>
+		<script>
+
+		</script>
+	</head>
+	<body>
+		<div id="main">
+			<div id="left">
+				<div class="room">
+					<span id="room_name">聊天室名称</span><br>
+					<div id="owner" style="border: 0px;">
+						<span id="own">聊天室管理员：</span>
+						<span id="owner_id">123465</span>
+					</div>
+				</div>
+			</div>
+			<div id="right">
+				<div id="content">
+					<div id="introduce_name">
+						<div id="irn">
+							聊天室名称
+						</div>
+						<div id="iro">
+							聊天室管理员：
+						</div>
+						<div id="iron">name
+						</div>
+					</div>
+					<div id="introduce">
+						<div id="in">聊天室简介:</div>
+						<div id='ic'>无</div>
+					</div>
+				</div>
+				<button type="button" id="in_btn">进入聊天室</button>
+			</div>
+		</div>
+
+		<script>
+			$(document).ready(get_room_list());
+			var data=null;
+			var num=0;
+			function get_room_list() {
+				var content_list=[];
+				var room_list=[];
+				var xhr = new XMLHttpRequest();
+				xhr.open('get','/room',false);
+				xhr.onreadystatechange=function () {
+					if(xhr.readyState==4&&xhr.status==200){
+						data=JSON.parse(xhr.responseText);
+						console.log(data);
+						if(data[0]==0){
+							alert(data[1])
+						}else {
+							for(var i=0;i<data.length;i++){
+								var room=$("<div class='room'><span id='room_name'>"+data[i][1]+"</span><br>"+
+									"<div id='owner'>" +
+									"<span id='own'>聊天室管理员:</span>" +
+									"<span id='owner_id'>"+data[i][3]+"</span>" +
+									"</div></div>");
+								room_list.push(room);
+								$("#left").append(room);
+								var content=$("<div id='content'><div id='introduce_name'>" +
+										"<div id='irn'>" +
+										data[i][1] +
+										"</div>" +
+										"<div id='iro'>" +
+										"聊天室管理员：" +
+										"</div>" +"<div id='iron'>" +data[i][3]+
+										"</div>"+
+										"</div>" +
+										"<div id='introduce'>" +
+										"<div id='in'>聊天室简介</div>" +
+										"<div id='ic'>"+data[i][2]+"</div>" +
+										"</div></div>"+"<button id='in_btn'>进入聊天室</button>")
+								content_list.push(content);
+							}
+							$(".room").click(function() {
+								for(var i=0;i<room_list.length;i++){
+									if(this==room_list[i][0]){
+										console.log(i);
+										num=i;
+									}
+								}
+								$("#right").html(content_list[num]);
+							})
+
+						}
+					}
+				}
+				xhr.send(null)
+			}
+
+
+
+
+
+		</script>
+	</body>
 </html>

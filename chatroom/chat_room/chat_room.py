@@ -57,5 +57,14 @@ def register():
     elif request.method=="GET":
         return render_template('register.html')
 
+@app.route('/room',methods=['GET','POST'])
+def room():
+    room_list=json.dumps(db.query_room_list())
+    print(room_list)
+    if room_list:
+        return room_list
+    else:
+        return json.dumps((0,"没有找到聊天室"))
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='192.168.0.189')

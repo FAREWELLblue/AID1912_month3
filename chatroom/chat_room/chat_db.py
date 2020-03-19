@@ -62,17 +62,17 @@ class Database:
         else:
             return False
 
-    # 查询单词
-    def query(self):
-        sql = "flush privileges;"
+    # 查询聊天室列表
+    def query_room_list(self):
+        sql="flush privileges;"
         self.cur.execute(sql)
-        sql = "select record_id,content,time,username from chat_record as c,user as u where c.u_id=u.id;"
+        sql = "select r_id,rname,introduce,username from room_list as r, user as u where r.r_owner_id = u.id;"
         self.cur.execute(sql)
-        r = self.cur.fetchall() # 也有可能查不到
+        r = self.cur.fetchall()
         if r:
-            return r # 将单词解释返回
+            return r
         else:
-            return '没有聊天记录'
+            return '当前没有聊天室'
 
     # 插入历史记录
     def insert_chat_record(self,u_id,chat_record):
