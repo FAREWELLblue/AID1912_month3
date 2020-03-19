@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>注册</title>
+    <link rel="icon" href="../static/bgimg/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+<body>
+    
+    <div id='main'>
+        <div id="d_login">
+            <div><input type="text" id="username" placeholder="请输入用户名" class="form-control">
+            <span id="uname_msg"></span></div>
+            <div><input type="password" id="password" placeholder="请输入密码"class="form-control">
+            <span id="pwd_msg"></span></div>
+            <div><input type="password" id="re_password" placeholder="请重复密码"class="form-control">
+            <span id="rpwd_msg"></span></div>
+            <input type="text" id="email" placeholder="请输入邮箱" class="form-control">
+            <button id="btn_register" class="btn btn-default">注册</button>
+        </div>
+    </div>
+    <script src="../static/js/jquery.min.js"></script>
+     <script src="../static/js/register.js"></script>
+<!--    <script>-->
+<!--var $uname=$("#username")-->
+<!--var $pwd=$("#password")-->
+<!--var $rpwd=$("#re_password")-->
+<!--var $email=$("#email")-->
+<!--var $msg=$("#uname_msg")-->
+<!--var $rpmsg=$("#rpwd_msg")-->
+<!--var $pmsg=$("#pwd_msg")-->
+<!--var result=false;-->
+<!--$uname.blur(function check_uname(){-->
+<!--    if($uname.val()!=''){-->
+<!--        var xhr = new XMLHttpRequest();-->
+<!--        xhr.open('post','/register',false);-->
+<!--        xhr.onreadystatechange=function(){-->
+<!--            if(xhr.readyState==4&&xhr.status==200){-->
+<!--                console.log(JSON.parse(xhr.responseText)['msg']);-->
+<!--                $msg.html(JSON.parse(xhr.responseText)["msg"])-->
+<!--                $msg.css({-->
+<!--                   "float":"left",-->
+<!--                   "border":"1px solid #000"-->
+<!--                })-->
+<!--                console.log($msg);-->
+<!--                $uname.after($msg);-->
+<!--                if(JSON.parse(xhr.responseText)['code']==0){-->
+<!--                    $msg.css("color","red");-->
+<!--                    result = false;-->
+<!--                }else{-->
+<!--                    $msg.css("color","green");-->
+<!--                    result = true;-->
+<!--                }-->
+<!--            }-->
+<!--        }-->
+<!--        data=JSON.stringify({"dur":0,'uname':$uname.val()})-->
+<!--        xhr.setRequestHeader('Content-Type','application/json')-->
+<!--        xhr.send(data)-->
+<!--        return result-->
+<!--    }-->
+<!--})-->
+
+<!--$("#btn_register").click(function(){-->
+<!--    if($uname.val()==''){-->
+<!--        $msg.html('用户名不可为空').css('color','red');-->
+<!--        if($pwd.val()==''){-->
+<!--            $pmsg.html('密码不可为空').css('color','red');-->
+<!--        }-->
+<!--        if($rpwd.val()==''){-->
+<!--            $rpmsg.html('请再输入一次密码').css('color','red');-->
+<!--        }-->
+<!--    }-->
+<!--    else if(!result){-->
+<!--        alert('请重新输入用户名');-->
+<!--        $msg.html('请重新输入用户名').css('color','red');-->
+<!--        $uname.val('');-->
+<!--    }-->
+<!--    else{-->
+<!--        console.log(result)-->
+<!--        var xhr = new XMLHttpRequest();-->
+<!--        xhr.open('post','/register',true);-->
+<!--        xhr.onreadystatechange=function(){-->
+<!--            if(xhr.readyState==4&&xhr.status==200){-->
+<!--                if(JSON.parse(xhr.responseText)['code']=='200'){-->
+<!--                    alert(JSON.parse(xhr.responseText)['msg']);-->
+<!--                    $(location).attr('href','/index');-->
+<!--                }-->
+<!--            }-->
+<!--        }-->
+<!--        data=JSON.stringify({"dur":1,'uname':$uname.val(),'password':$pwd.val(),'email':$email.val()})-->
+<!--        console.log(data)-->
+<!--        xhr.setRequestHeader('Content-Type','application/json')-->
+<!--        xhr.send(data)-->
+<!--    }-->
+<!--})-->
+
+<!--$("#re_password").change(function(){-->
+<!--    if($pwd.val()==$rpwd.val()){-->
+<!--        $rpmsg.css('color','green')-->
+<!--        $rpmsg.html('两次密码输入一致')-->
+<!--    }else{-->
+<!--        $rpmsg.css('color','red')-->
+<!--        $rpmsg.html('两次密码输入不一致')-->
+<!--    }-->
+<!--})-->
+
+<!--    </script>-->
+
+</body>
+</html>
