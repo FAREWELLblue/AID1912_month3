@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jq_AJAX</title>
+</head>
+<body>
+    <div>
+        姓名 <input type="text" id="uname">
+    </div>
+    <div id='loading' style="display: none;">
+        加载中...[我是动画]
+    </div>
+    <button  id="btn">jq_AJAX</button><!--disabled -->
+    <button  id="btn2">jq_AJAX post</button><!--disabled -->
+    <script src="../static/jquery.min.js"></script>
+    <script>
+        $("#btn").click(function(){
+            $.ajax({
+                url:'/ajax_server',
+                type:'get',
+                async:true,
+                dataType:'json',
+                success:function(res){
+                    console.log(res);
+                    // 相应成功 恢复按钮
+                    $("#btn").removeAttr('disabled')
+                    $("#loading").hide();
+                },
+                error:function(err){
+                   alert("Server is busy");
+                   $("#btn").removeAttr('disabled')
+                   $("#loading").hide();
+                    // console.log(err)
+                },
+                beforeSend:function(){
+                    //防止用户重复提交数据
+                    //发送请求之前 禁用按钮
+                    $("#btn").attr('disabled','disabled');
+                    $("#loading").show(3000);
+                }
+            })
+        })
+    </script>
+    <script>
+        $("#btn2").click(function(){
+            $.ajax({
+                url:'/ajax_server',
+                type:'post',
+                dataType:'json',// 接收到的数据类型
+                contentType:'application/json',
+                data:JSON.stringify({uname:$("#uname").val()}),
+                success:function(res){
+                    console.log(res);
+                },
+                error:function(e){
+                    alert('Server is busy..');
+                },
+                // beforeSend:function(xhr){
+                //     xhr.setRequestHeader=('Content-Type','application/json')
+                // }
+            })
+        })
+    </script>
+</body>
+</html>
