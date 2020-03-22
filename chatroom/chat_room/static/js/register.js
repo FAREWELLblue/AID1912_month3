@@ -6,33 +6,33 @@ var $msg=$("#uname_msg")
 var $rpmsg=$("#rpwd_msg")
 var $pmsg=$("#pwd_msg")
 var result=false;
-$uname.blur(function check_uname(){
-    if($uname.val()!=''){
-        var xhr = new XMLHttpRequest();
-        xhr.open('post','/register',false);
-        xhr.onreadystatechange=function(){
-            if(xhr.readyState==4&&xhr.status==200){
-                console.log(JSON.parse(xhr.responseText)['msg']);
-                $msg.html(JSON.parse(xhr.responseText)["msg"])
-                $msg.css({
-                   "float":"left",
-                   "border":"1px solid #000"
-                })
-                console.log($msg);
-                $uname.after($msg);
-                if(JSON.parse(xhr.responseText)['code']==0){
-                    $msg.css("color","red");
-                    result = false;
-                }else{
-                    $msg.css("color","green");
-                    result = true;
-                }
+function check_uname(){
+    $.ajax({
+        url:'/register',
+        type:'post',
+        async:false,
+        contentType:'application/json',
+        data:JSON.stringify({"dur":0,'uname':$uname.val()}),
+        dataType:'json',
+        success:function(res){
+            console.log(res);
+            $msg.html(res['msg']);
+            if(res['code']==0){
+                $msg.css("color","red");
+                result = false;
+            }else{
+                $msg.css("color","green");
+                result = true;
             }
         }
-        data=JSON.stringify({"dur":0,'uname':$uname.val()})
-        xhr.setRequestHeader('Content-Type','application/json')
-        xhr.send(data)
-        return result
+    })
+}
+$uname.blur(function(){
+    if($uname.val()!=''){
+        check_uname();
+    }else{
+        $msg.css("color","red");
+        $msg.html('请输入用户名')
     }
 })
 
@@ -53,29 +53,41 @@ $("#btn_register").click(function(){
     }
     else{
         console.log(result)
-        var xhr = new XMLHttpRequest();
-        xhr.open('post','/register',true);
-        xhr.onreadystatechange=function(){
-            if(xhr.readyState==4&&xhr.status==200){
-                if(JSON.parse(xhr.responseText)['code']=='200'){
-                    alert(JSON.parse(xhr.responseText)['msg']);
-                    $(location).attr('href','/index');
-                }
+        $.ajax({
+            url:'/register',
+            type:'post',
+            data:JSON.stringify({"dur":1,'uname':$uname.val(),'password':$pwd.val(),'email':$email.val()}),
+            dataType:'json',
+            contentType:'application/json',
+            async:true,
+            success:function(res){
+                alert(res['msg']);
+                $(location).attr('href','/index');
             }
-        }
-        data=JSON.stringify({"dur":1,'uname':$uname.val(),'password':$pwd.val(),'email':$email.val()})
-        console.log(data)
-        xhr.setRequestHeader('Content-Type','application/json')
-        xhr.send(data)
+        })
+
     }
 })
 
-$("#re_password").change(function(){
-    if($pwd.val()==$rpwd.val()){
-        $rpmsg.css('color','green')
-        $rpmsg.html('两次密码输入一致')
-    }else{
-        $rpmsg.css('color','red')
-        $rpmsg.html('两次密码输入不一致')
+$rpwd.blur(function (){
+    if($pwd.val()!=''&&$rpwd.val()!=''){
+        if($pwd.val()==$rpwd.val()){
+            $rpmsg.css('color','green')
+            $rpmsg.html('两次密码输入一致')
+        }else{
+            $rpmsg.css('color','red')
+            $rpmsg.html('两次密码输入不一致')
+        }
+    }
+})
+$pwd.blur(function(){
+    if($pwd.val()!=''&&$rpwd.val()!=''){
+        if($pwd.val()==$rpwd.val()){
+            $rpmsg.css('color','green')
+            $rpmsg.html('两次密码输入一致')
+        }else{
+            $rpmsg.css('color','red')
+            $rpmsg.html('两次密码输入不一致')
+        }
     }
 })

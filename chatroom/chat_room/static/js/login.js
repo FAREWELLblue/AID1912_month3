@@ -2,21 +2,26 @@ $uname=$("#username");
 $pwd=$("#password");
 $("#btn_login").click(
 function (){
-    var xhr = new XMLHttpRequest();
-    xhr.open('post','/login',true)
-    xhr.onreadystatechange=function(){
-        if(xhr.readyState==4&&xhr.status==200){
-            console.log(xhr.responseText);
-            if(JSON.parse(xhr.responseText)['code']==1){
+    $.ajax({
+        url:'/login',
+        type:'post',
+        data:JSON.stringify({"username":$uname.val(),"password":$pwd.val()}),
+        dataType:'json',
+        contentType:'application/json',
+        success:function(res){
+            $("#btn").removeAttr('disabled')
+            console.log(res);
+            if(res['code']==1){
                 $(location).attr('href','/login')
-            }else if(JSON.parse(xhr.responseText)['code']==0){
-                alert(JSON.parse(xhr.responseText)['msg']);
+            }else if(res['code']==0){
+                alert(res['msg']);
                 location.reload();
             }
+        },
+        beforeSend:function(){
+            $("#btn_login").attr('disabled','disabled')
         }
-    }
-    data=JSON.stringify({"username":$uname.val(),"password":$pwd.val()})
-    xhr.setRequestHeader('Content-Type','application/json')
-    console.log(data);
-    xhr.send(data);
+    })
+
+    
 })

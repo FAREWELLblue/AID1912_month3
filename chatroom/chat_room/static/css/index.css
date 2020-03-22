@@ -33,17 +33,17 @@ div{
 }
 .room{
     background-color: bisque;
-    height: 60px;
-    margin: 20px;
-    padding: 10px;
+    margin: 8%;
+    padding: 5%;
+    border-radius: 10px;
 }
-#room_name{
+ #room_name{
     font-size: 20px;
     font-weight: bolder;
-}
-#owner{
-    margin-top: 10px;
-    margin-left: 20px;
+} 
+.owner{
+    margin-top: 10%;
+    margin-left: 7%;
 }
 #content{
     width: 100%;
@@ -53,8 +53,8 @@ div{
     border: 1px solid red;
     background-color: bisque;
     width: 80%;
-    height: 30%;
-    margin: 6% auto;
+    /* height: 30%; */
+    margin: 10% auto;
     border-radius: 10px;
 }
 #introduce{
@@ -89,9 +89,15 @@ div{
     margin: 2%;
 }
 #in_btn{
-    width: 50%;
-    height: 10%;
-    position: relative;
-    top: 0%;
-    left: 25%;
+    /* width: 90%; */
+    height: 9%;
+    position: absolute;
+    bottom: 10%;
+    left: 0%;
+    /* margin: auto ; */
+}
+#logout{
+    position: absolute;
+    right:0;
+    top:0
 }

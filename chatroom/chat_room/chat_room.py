@@ -21,7 +21,7 @@ def login():
             print('session.',session.get('username'))
             return render_template('/index.html')
         else:
-            return json.dumps({'code':'0',"msg":"未登录"})
+            return render_template('/login.html')
     elif request.method=="POST":
         name=request.json.get('username')
         pwd=request.json.get('password')
@@ -61,10 +61,18 @@ def register():
 def room():
     room_list=json.dumps(db.query_room_list())
     print(room_list)
-    if room_list:
-        return room_list
+    if session.get('username'):
+        if room_list:
+            return json.dumps({'code':'1',"data":room_list,'user':session.get('username')})
+        else:
+            return json.dumps({'code':'0','data':'null','user':session.get('username')})
     else:
-        return json.dumps((0,"没有找到聊天室"))
+        return json.dumps({'code':'404','data':{"msg":"没有登录"},})
+
+@app.route('/logout')
+def logout():
+    session['username']=None
+    return json.dumps({'code':"1",'msg':"已删除"})
 
 if __name__ == '__main__':
-    app.run(debug=True, host='192.168.0.189')
+    app.run(debug=True,host="192.168.0.189")

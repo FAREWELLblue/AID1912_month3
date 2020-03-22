@@ -4,46 +4,29 @@ body{
     background-attachment: fixed;/*图片相对于浏览器固定,这里设置背景图片固定，不随内容滚动*/
     background-origin: border-box;/*从边框区域显示*/
     background-size:cover;
-
 }
 #d_login{
-    width: 20%;
-    height: 40%;
-    background-color: #ffcc33;
-    /*border: 1px solid blue;*/
-    /* padding: 10px 10px; */
+    width: 100%;
+    height: 300px;
+    /* background-color:blanchedalmond; */
     position: absolute;
-    right: 20%;
-    top:30%;
-    border-radius: 10px;
+    top: 0;
+    /* left: 0; */
+    /* right: 0; */
+    bottom: 0;
+    margin: auto;
 }
-
-#username,#password{
-    width: 60%;
-    height: 10%;
-    margin: 20% 20%;
-    margin-bottom: 5%;
-    /*border: 1px solid red;*/
+form{
+    background-color:blanchedalmond;
+    padding: 10%;
+    border-radius:15px;
 }
-#username{
-    margin-top: 10%;
+.btns{
+    margin: 10%;
+    margin-bottom:20% ;
 }
-
-#btn_login {
-    width: 50%;
-    margin-left: 25%;
-}
-#login_title{
-    font-size:20px;
-    font-weight: bold;
-    color: #000066;
-    display: inline-block;
-    margin-top: 5%;
-    position: relative;
-    left: 27%;
-}
-#register{
-    position: absolute;
-    left: 0;
-    bottom: 5%;
+h2{
+    margin-top: -8%;
+    text-align: center;
+    fo
 }
