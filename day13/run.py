@@ -122,6 +122,9 @@ def cross():
 @app.route('/cross1')
 def cross1():
     return render_template('cross1.html')
+@app.route('/cross2')
+def cross2():
+    return render_template('cross2.html')
 
 
 if __name__ == "__main__":
