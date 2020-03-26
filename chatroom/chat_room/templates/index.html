@@ -18,6 +18,7 @@
 				<div class="username btn btn-block ">
 					<h2 id="uname">用户名称</h2>
 				</div>
+				<button id='btn_new' class="btn btn-info btn-block">创建新聊天室</button >
 				<div class="room">
 					<span id="room_name">聊天室名称</span>
 					<div class="owner" style="border: 0px;">
@@ -25,6 +26,7 @@
 						<span id="owner_id">123465</span>
 					</div>
 				</div>
+				
 			</div>
 			<div id="right">
 				<div id="content">
@@ -47,7 +49,20 @@
 			</div>
 			<button class="btn btn-warning" id="logout">退出登录</button>
 		</div>
-		
+		<div id="new_room" class="center-block">
+			<form>
+				<div class="form_group">
+					<label for='r_name'>请输入聊天室名称:</label>
+					<input type="text" id="r_name" class="form-control" />
+				</div>
+				<div class="from_group">
+					<lable for="r_intro">请输入聊天室简介:</lable>
+					<textarea rows="" cols="" class="form-control" id="r_intro"></textarea>
+				</div>
+				<button type="button" class="btn btn-info btn-block" id="n_btn">提交</button>
+			</form>
+		</div>
 		<script src="../static/js/index.js"></script>
+		
 	</body>
 </html>

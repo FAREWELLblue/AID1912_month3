@@ -74,13 +74,27 @@ class Database:
         else:
             return '当前没有聊天室'
 
-    # 插入历史记录
-    def insert_chat_record(self,u_id,chat_record):
-        sql = "insert into chat_record (u_id, content) values (%s, '%s');"%(u_id,chat_record)
-        print(sql)
+    # 新建聊天室
+    def insert_chat_room(self,r_name,r_intro,username):
+        sql = "insert into room_list (rname,introduce,r_owner_id) values(%s,%s,(select id from user where username=%s));"
+
         try:
-            self.cur.execute(sql)
+            self.cur.execute(sql,[r_name,r_intro,username])
             self.db.commit()
+            return True
         except Exception as e:
             print(e)
             self.db.rollback()
+            return False
+
+    # 聊天记录入库
+    def insert_chat_record(self,u_name,mes,time,r_name):
+        sql="insert into chat_record (content,time,r_id,u_id) values (%s,%s,(select r_id from room_list where rname= %s ),(select id from user where username=%s));"
+        try:
+            self.cur.execute(sql,[mes,time,r_name,u_name])
+            self.db.commit()
+            return True
+        except Exception as e:
+            print(e)
+            self.db.rollback()
+            return False

@@ -101,3 +101,17 @@ div{
     right:0;
     top:0
 }
+#new_room{
+    width: 40%;
+    background-color: beige;
+    padding: 3%;
+    display: block;
+    border-radius: 15px;
+}
+#r_name,#r_intro{
+    margin: 2%;
+    resize:none
+}
+#n_btn{
+    margin: 3% 2%;
+}

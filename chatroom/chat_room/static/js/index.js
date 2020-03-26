@@ -6,7 +6,7 @@ var room_list=[];
 var username=null;
 function get_room_list() {
     $.ajax({
-        url:'/room',
+        url:'/room?req=room_list',
         type:'get',
         dataType:'json',
         success:function(data){
@@ -67,4 +67,29 @@ $("#logout").click(function(){
             location.reload();
         }
     },'json');
+})
+$("#new_room").hide()
+$("#btn_new").click(function(){
+    $("#new_room").fadeIn(100)
+    $("#main").fadeOut(100)
+})
+$("#n_btn").click(function(){
+    r_name=$("#r_name")
+    r_intr=$("#r_intro")
+    $.ajax({
+        url:'/room',
+        type:'post',
+        dataType:'json',
+        contentType:"application/json",
+        data:JSON.stringify({r_name:r_name.val(),r_intro:r_intr.val()}),
+        success:function(res){
+            if (res.code=='1'){
+                location.reload();
+            }else if (res.code=='0'){
+                console.log(res.msg)
+            }
+        }
+    })
+    
+    
 })

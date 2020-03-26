@@ -1,10 +1,13 @@
 from flask import Flask,render_template,session,request
+from flask_socketio import SocketIO,emit
 from chat_db import Database
 import json
+import time
 
 app=Flask(__name__)
 app.config['SECRET_KEY'] = '123456'
 db=Database()
+socketio=SocketIO(app)
 
 @app.route('/')
 def index_login():
@@ -59,20 +62,58 @@ def register():
 
 @app.route('/room',methods=['GET','POST'])
 def room():
-    room_list=json.dumps(db.query_room_list())
-    print(room_list)
-    if session.get('username'):
-        if room_list:
-            return json.dumps({'code':'1',"data":room_list,'user':session.get('username')})
+    if request.method=="GET":
+        if session.get('username'):
+            if request.args.get('req')=='room_list':
+                room_list=json.dumps(db.query_room_list())
+                print(room_list)
+                if room_list:
+                    data = json.dumps({'code':'1',"data":room_list,'user':session.get('username')})
+                else:
+                    data = json.dumps({'code':'0','data':'null','user':session.get('username')})
+            else:
+                data = json.dumps({'code':'200','user':session.get('username')})
         else:
-            return json.dumps({'code':'0','data':'null','user':session.get('username')})
-    else:
-        return json.dumps({'code':'404','data':{"msg":"没有登录"},})
+            data = json.dumps({'code':'404','data':{"msg":"没有登录"},})
+            
+    elif request.method=="POST":
+        r_name=request.json.get("r_name")
+        r_intro = request.json.get('r_intro')
+        owner=session.get('username')
+        # print(owner,'创建',r_name,'简介',r_intro)
+        if db.insert_chat_room(r_name,r_intro,owner):
+            data = json.dumps({"code":'1','msg':'创建完成'})
+        else:
+            data = json.dumps({"code":'0','msg':'创建失败'})
+    return data
+            
+
+@app.route('/chat_room',methods=["post",'get'])
+def chat_room():
+    if request.method=='GET':
+        return render_template('room.html')
+    elif request.method=='POST':
+        time_now=time.strftime('%Y-%m-%d %H:%M:%S',time.localtime())
+        u_name=request.json.get('user')
+        mes=request.json.get('message')
+        r_name=request.json.get('r_name')
+        if db.insert_chat_record(u_name,mes,time_now,r_name):
+            data = json.dumps({'code':'1','msg':"发送成功"})
+        else:
+            data = json.dumps({'code':'0','msg':"发送失败"})
+        return data
+        
 
 @app.route('/logout')
 def logout():
     session['username']=None
-    return json.dumps({'code':"1",'msg':"已删除"})
+    return json.dumps({'code':"1",'msg':"已删除session中username"})
+
+# @socketio.on('/join')
+# def on_join(data):
+#     username=data['username']
+
 
 if __name__ == '__main__':
-    app.run(debug=True,host="192.168.0.189")
+    # app.run(debug=True,host="127.0.0.1")
+    socketio.run(app,debug=True)
