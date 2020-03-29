@@ -28,7 +28,7 @@ function get_room_list() {
                     $("#left").append(room);
                     var content=$("<div id='content'><div id='introduce_name'>" +
                             "<div id='irn'>" + e[1] +
-                            "</div>" +
+                            "</div><p id='room_id' style='display:none;'>"+e[0]+"</p>" +
                             "<div id='iro'>" +
                             "聊天室管理员：" +
                             "</div>" +"<div id='iron'>" +e[3]+
@@ -37,8 +37,9 @@ function get_room_list() {
                             "<div id='introduce'>" +
                             "<div id='in'>聊天室简介</div>" +
                             "<div id='ic'>"+e[2]+"</div>" +
-                            "</div></div>"+"<button id='in_btn' class='btn btn-block'>进入聊天室</button>")
+                            "</div></div>"+"<button id='in_btn' class='btn btn-block' onclick='in_room()'>进入聊天室</button>")
                     content_list.push(content);
+                   
                 })
                 
                 $(".room").click(function() {
@@ -46,6 +47,7 @@ function get_room_list() {
                         if(this==room_list[i][0]){
                             console.log(i);
                             num=i;
+                            
                             console.log(num);
                         }
                     }
@@ -86,10 +88,17 @@ $("#n_btn").click(function(){
             if (res.code=='1'){
                 location.reload();
             }else if (res.code=='0'){
-                console.log(res.msg)
+                alert('聊天室名称不可重复');
+                location.reload();
             }
         }
     })
     
     
 })
+
+function in_room(){
+    rname=$("#irn").html()
+    // console.log($("#room_id").html());
+    window.location.href='/chat_room?rname='+rname
+}

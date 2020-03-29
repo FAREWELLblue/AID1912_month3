@@ -1,6 +1,7 @@
 from flask import Flask,render_template,session,request
 from flask_socketio import SocketIO,emit
 from chat_db import Database
+import datetime
 import json
 import time
 
@@ -72,7 +73,7 @@ def room():
                 else:
                     data = json.dumps({'code':'0','data':'null','user':session.get('username')})
             else:
-                data = json.dumps({'code':'200','user':session.get('username')})
+                data = json.dumps({'code':'200','user':session.get('username'),'room':session.get('rname')})
         else:
             data = json.dumps({'code':'404','data':{"msg":"没有登录"},})
             
@@ -91,16 +92,37 @@ def room():
 @app.route('/chat_room',methods=["post",'get'])
 def chat_room():
     if request.method=='GET':
+        session['rname']=request.args.get('rname')
         return render_template('room.html')
     elif request.method=='POST':
-        time_now=time.strftime('%Y-%m-%d %H:%M:%S',time.localtime())
-        u_name=request.json.get('user')
-        mes=request.json.get('message')
-        r_name=request.json.get('r_name')
-        if db.insert_chat_record(u_name,mes,time_now,r_name):
-            data = json.dumps({'code':'1','msg':"发送成功"})
+        if request.json.get('msg')=='say':
+            time_now=time.strftime('%Y-%m-%d %H:%M:%S',time.localtime())
+            u_name=request.json.get('user')
+            mes=request.json.get('message')
+            r_name=request.json.get('r_name')
+            print(u_name,mes,time_now,r_name)
+            if db.insert_chat_record(u_name,mes,time_now,r_name):
+                data = json.dumps({'code':'11','msg':"发送成功"})
+            else:
+                data = json.dumps({'code':'40','msg':"发送失败"})
+        elif request.json.get('msg')=='read':
+            r_name=request.json.get('rname')
+            print('room-name----------',r_name)
+            records=db.query_chat_record(r_name)
+            if records:
+                records=list(map(list,records))
+                for record in records:
+                    for item in record:
+                        if isinstance(item,datetime.datetime):
+                            item = item.strftime('%Y-%m-%d %H:%M:%S')
+                            del record[-1]
+                            record.append(item)
+                print(records)
+                data=json.dumps({'code':'12','data':records})
+            else:
+                data=json.dumps({'code':'42','msg':'无聊天记录'})
         else:
-            data = json.dumps({'code':'0','msg':"发送失败"})
+            data=json.dumps({'code':'41','msg':'无法识别ajax代码'})
         return data
         
 
@@ -116,4 +138,4 @@ def logout():
 
 if __name__ == '__main__':
     # app.run(debug=True,host="127.0.0.1")
-    socketio.run(app,debug=True)
+    socketio.run(app,debug=True,host="192.168.0.189")

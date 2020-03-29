@@ -76,6 +76,9 @@ class Database:
 
     # 新建聊天室
     def insert_chat_room(self,r_name,r_intro,username):
+        sql="select * from room_list where rname=%s"
+        if self.cur.execute(sql,[r_name]):
+            return False
         sql = "insert into room_list (rname,introduce,r_owner_id) values(%s,%s,(select id from user where username=%s));"
 
         try:
@@ -89,12 +92,34 @@ class Database:
 
     # 聊天记录入库
     def insert_chat_record(self,u_name,mes,time,r_name):
-        sql="insert into chat_record (content,time,r_id,u_id) values (%s,%s,(select r_id from room_list where rname= %s ),(select id from user where username=%s));"
+        
+        sql="insert into chat_record (content,time,u_name,r_id) values (%s,%s,%s,(select r_id from room_list where rname= %s ));"
         try:
-            self.cur.execute(sql,[mes,time,r_name,u_name])
+            self.cur.execute(sql,[mes,time,u_name,r_name])
             self.db.commit()
             return True
         except Exception as e:
             print(e)
             self.db.rollback()
             return False
+    # 查询聊天记录
+    def query_chat_record(self,r_name):
+        sql="flush privileges;"
+        self.cur.execute(sql)
+        sql='select record_id,u_name,content,time from chat_record where r_id=(select r_id from room_list where rname=%s)'
+        self.cur.execute(sql,[r_name])
+        r = self.cur.fetchall()
+        if r:
+            return r
+        else:
+            return False
+# CREATE TABLE `chat_record` (
+#   `record_id` int(11) NOT NULL AUTO_INCREMENT,
+#   `u_name` varchar(20) not null,
+#   `r_id` int(11) not null,
+#   `content` text not null,
+#   `time` datetime DEFAULT CURRENT_TIMESTAMP,
+#   PRIMARY KEY (`record_id`),
+#   KEY `u_fk` (`u_name`),
+#   CONSTRAINT `u_fk` FOREIGN KEY (`u_name`) REFERENCES `user` (`username`)
+# ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=gbk
